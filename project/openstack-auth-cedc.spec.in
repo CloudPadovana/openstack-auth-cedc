@@ -1,0 +1,67 @@
+Summary: Customization of Openstack Horizon for Cloud Veneto
+Name: openstack-auth-cedc
+Version: @PKGVERSION@
+Release: @PKGRELEASE@%{?dist}
+License: Apache Software License
+Vendor: EMI
+URL: http://glite.cern.ch/
+Group: System Environment/Libraries
+Requires: openstack-auth-shib
+Conflicts: openstack-auth-cap
+BuildArch: noarch
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+AutoReqProv: yes
+Source: %{name}.tar.gz
+
+%if ! (0%{?fedora} > 12 || 0%{?rhel} > 5)
+%{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
+%{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")}
+%endif
+
+%description
+Customization of Openstack Horizon for Cloud Veneto
+
+%prep
+
+%setup -c -q
+
+%build
+
+%install
+rm -rf %{buildroot}
+mkdir -p %{buildroot}
+python setup.py install -O1 --prefix %{buildroot}/usr --install-data %{buildroot}
+
+mkdir -p %{buildroot}/usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.d
+mv  %{buildroot}/%{python_sitelib}/dashboard_conf/_1001_* \
+    %{buildroot}/usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.d
+
+%clean
+rm -rf %{buildroot}
+
+
+%files
+%defattr(-,root,root)
+%config(noreplace) /etc/openstack-auth-shib/idem-template-metadata.xml
+/etc/openstack-auth-shib/notifications/notifications_en.txt
+/usr/share/openstack-dashboard/openstack_dashboard/static/dashboard/img/logoCloudVeneto.png
+/usr/share/openstack-dashboard/openstack_dashboard/static/dashboard/img/logoCloudVenetoStrip.png
+/usr/share/openstack-dashboard/openstack_dashboard/static/dashboard/img/logoCloudVeneto.ico
+/usr/share/openstack-dashboard/openstack_dashboard/templates/aup.html
+/usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.d/_1001_cedc_*.py
+/usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.d/_1001_cedc_*.pyc
+/usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.d/_1001_cedc_*.pyo
+/usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/static/_styles.scss
+/usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/static/_variables.scss
+/usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/templates/_aai_status_style.html
+/usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/templates/_aai_registr_style.html
+/usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/templates/auth/_splash.html
+/usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/templates/header/_brand.html
+
+
+%changelog
+* Mon Nov 20 2017 Cloud Area Padovana <cloud-support@lists.pd.infn.it> - @PKGVERSION@-@PKGRELEASE@
+- Porting on Ocata
+- Migration to OS-Federation
+
+
