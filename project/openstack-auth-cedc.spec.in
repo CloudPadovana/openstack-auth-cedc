@@ -35,6 +35,7 @@ python setup.py install -O1 --prefix %{buildroot}/usr --install-data %{buildroot
 mkdir -p %{buildroot}/usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.d
 mv  %{buildroot}/%{python_sitelib}/dashboard_conf/_1001_* \
     %{buildroot}/usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.d
+rm -f %{buildroot}/%{python_sitelib}/*.egg-info
 
 %clean
 rm -rf %{buildroot}
