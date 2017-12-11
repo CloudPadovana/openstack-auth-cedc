@@ -54,10 +54,9 @@ class bdist_rpm(_bdist_rpm):
 os_main_dir = 'usr/share/openstack-dashboard/openstack_dashboard/'
 templates_dir = os_main_dir + 'templates'
 img_dir = os_main_dir + 'static/dashboard/img'
-themes_dir = os_main_dir + 'themes'
+theme_dir = os_main_dir + 'themes/cedc'
 
 logo_list = [
-    'src/templates/logoCloudVeneto.ico',
     'src/templates/logoCloudVeneto.png',
     'src/templates/logoCloudVenetoStrip.png'
 ]
@@ -74,14 +73,15 @@ setup(
       data_files=[
                   (templates_dir, ['src/templates/aup.html']),
                   (img_dir, logo_list),
+                  (theme_dir + '/static/img', ['src/templates/favicon.ico']),
                   ('etc/openstack-auth-shib', ['config/idem-template-metadata.xml']),
                   ('etc/openstack-auth-shib/notifications', ['config/notifications_en.txt']),
-                  (themes_dir + '/cedc/static', 
+                  (theme_dir + '/static', 
                     [ 'src/themes/cedc/static/_styles.scss', 'src/themes/cedc/static/_variables.scss']),
-                  (themes_dir + '/cedc/templates', 
+                  (theme_dir + '/templates', 
                     ['src/themes/cedc/templates/_aai_status_style.html', 'src/themes/cedc/templates/_aai_registr_style.html']),
-                  (themes_dir + '/cedc/templates/auth', ['src/themes/cedc/templates/auth/_splash.html']),
-                  (themes_dir + '/cedc/templates/header', ['src/themes/cedc/templates/header/_brand.html']),
+                  (theme_dir + '/templates/auth', ['src/themes/cedc/templates/auth/_splash.html']),
+                  (theme_dir + '/templates/header', ['src/themes/cedc/templates/header/_brand.html']),
                  ],
       cmdclass={'bdist_rpm': bdist_rpm}
      )

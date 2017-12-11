@@ -51,8 +51,15 @@ rm -rf %{buildroot}
 /usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.d/_1001_cedc_*.py
 /usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.d/_1001_cedc_*.pyc
 /usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.d/_1001_cedc_*.pyo
+%dir /usr/share/openstack-dashboard/openstack_dashboard/themes/cedc
+%dir /usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/static
+%dir /usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/static/img
+%dir /usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/templates
+%dir /usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/templates/auth
+%dir /usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/templates/header
 /usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/static/_styles.scss
 /usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/static/_variables.scss
+/usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/static/img/favicon.ico
 /usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/templates/_aai_status_style.html
 /usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/templates/_aai_registr_style.html
 /usr/share/openstack-dashboard/openstack_dashboard/themes/cedc/templates/auth/_splash.html
